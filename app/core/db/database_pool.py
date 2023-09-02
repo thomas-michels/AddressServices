@@ -28,6 +28,5 @@ async def lifespan(app: FastAPI):
     await app.async_pool.close()
 
 async def get_connection(request: Request) -> AsyncConnection:
-    conn = await request.app.async_pool.getconn()
-
-    return PGConnection(conn=conn)
+    async with request.app.async_pool.connection() as conn:
+        yield PGConnection(conn=conn)
