@@ -1,0 +1,3 @@
+from .street_repository import StreetRepository
+from .neighborhood_repository import NeighborhoodRepository
+from .address_repository import AddressRepository
