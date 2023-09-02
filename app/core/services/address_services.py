@@ -27,7 +27,10 @@ class AddressServices:
                 name=address.neighborhood
             )
 
-        street = await self.__street_repository.select_by_name(name=address.street)
+        street = await self.__street_repository.select_by_zip_code(zip_code=address.zip_code)
+        if not street:
+            street = await self.__street_repository.select_by_name(name=address.street)
+
         if not street:
             raw_street = Street(
                 name=address.street,

@@ -29,8 +29,7 @@ async def get_address(services: AddressServices = Depends(address_composer)):
 
 @router.get("/zip-code/{zip_code}")
 async def get_address_by_zip_code(
-    # zip_code: str = Path(pattern=r"^\d{5}-\d{3}$"),
-    zip_code: str,
+    zip_code: str = Path(pattern=r"^\d{5}-\d{3}$"),
     services: AddressServices = Depends(address_composer),
 ):
     address = await services.search_by_zip_code(zip_code=zip_code)
