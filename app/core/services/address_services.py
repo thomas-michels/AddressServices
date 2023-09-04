@@ -61,6 +61,12 @@ class AddressServices:
         )
         return address
 
+    async def search_by_neighborhood(self, neighborhood_name: str) -> PlainAddress:
+        address = await self.__address_repository.search_by_neighborhood(
+            neighborhood_name=neighborhood_name
+        )
+        return address
+
     async def search_by_zip_code(self, zip_code: str) -> PlainAddress:
         address = await self.__address_repository.search_by_zip_code(zip_code=zip_code)
         return address

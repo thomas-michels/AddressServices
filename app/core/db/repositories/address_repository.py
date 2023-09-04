@@ -44,7 +44,38 @@ class AddressRepository(Repository):
         try:
             query = " WHERE s.name ILIKE %(street_name)s ESCAPE '';"
             result = await self.__select_address(
-                where=query, many=False, values={'street_name': '%{}%'.format(street_name)}
+                where=query,
+                many=False,
+                values={"street_name": "%{}%".format(street_name)},
+            )
+
+            if result:
+                plain_address = PlainAddress(**result)
+                return plain_address
+
+        except Exception as error:
+            _logger.error(f"Error: {str(error)}")
+
+    async def search_by_neighborhood(self, neighborhood_name: str) -> PlainAddress:
+        try:
+            query = f"""
+            SELECT 
+                n.id AS neighborhood_id,
+                n."name" AS neighborhood_name,
+                NULL AS street_id,
+                NULL AS street_name,
+                NULL AS zip_code,
+                NULL AS flood_quota,
+                NULL AS latitude,
+                NULL AS longitude
+            FROM public.neighborhoods n
+            WHERE n.name ILIKE %(neighborhood_name)s ESCAPE '';
+            """
+
+            result = await self.conn.execute(
+                sql_statement=query,
+                values={"neighborhood_name": "%{}%".format(neighborhood_name)},
+                many=False,
             )
 
             if result:

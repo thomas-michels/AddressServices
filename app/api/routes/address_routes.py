@@ -52,3 +52,16 @@ async def get_address_by_street(
         raise HTTPException(status_code=404, detail="Address not found")
 
     return address
+
+@router.get("/neighborhood/{neighborhood_name}")
+async def get_address_by_neighborhood(
+    neighborhood_name: str,
+    services: AddressServices = Depends(address_composer),
+):
+    neighborhood_name = unidecode(neighborhood_name).title()
+    address = await services.search_by_neighborhood(neighborhood_name=neighborhood_name)
+
+    if not address:
+        raise HTTPException(status_code=404, detail="Address not found")
+
+    return address
