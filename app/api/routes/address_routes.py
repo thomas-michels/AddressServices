@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, Path
 from fastapi.exceptions import HTTPException
+from unidecode import unidecode
 from app.api.composers import address_composer
 from app.core.services import AddressServices
 from app.core.entities import Address
@@ -44,6 +45,7 @@ async def get_address_by_street(
     street_name: str,
     services: AddressServices = Depends(address_composer),
 ):
+    street_name = unidecode(street_name).title()
     address = await services.search_by_street(street_name=street_name)
 
     if not address:
