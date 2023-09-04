@@ -1,7 +1,7 @@
 from typing import List
 from app.core.db import DBConnection
 from app.core.db.repositories.base_repository import Repository
-from app.core.entities import NeighborhoodInDB, StreetInDB, PlainAddress
+from app.core.entities import PlainAddress
 from app.core.configs import get_logger
 
 _logger = get_logger(__name__)
@@ -68,8 +68,8 @@ class AddressRepository(Repository):
                 s.latitude,
                 s.longitude
             FROM
-                development.streets s
-            LEFT JOIN development.neighborhoods n ON
+                public.streets s
+            LEFT JOIN public.neighborhoods n ON
                 s.neighborhood_id = n.id
 
             """
