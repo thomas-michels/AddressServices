@@ -36,7 +36,7 @@ jobs:
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         run: |
           echo "teste"
-          echo $DOCKER_USERNAME
+          echo "$DOCKER_USERNAME"
           docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
 
       - name: Build, tag
