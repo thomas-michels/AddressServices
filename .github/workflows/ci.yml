@@ -37,14 +37,14 @@ jobs:
         #   DOCKER_TOKEN: ${{ env.DOCKER_TOKEN }}
         run: |
           echo "teste"
-          echo "dckr_pat_5IBayN9UvXHQUhScwJ-XPQP47mc" | docker login -u "thomasmichelsbnu" --password-stdin
+          echo ${{ env.DOCKER_TOKEN }} | docker login -u ${{ env.DOCKER_USERNAME }} --password-stdin
 
       - name: Build, tag
         env:
           CONTAINER_NAME: ${{ env.MY_CONTAINER_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t address-services:$IMAGE_TAG .
+          docker build -t $CONTAINER_NAME:$IMAGE_TAG .
 
       - name: Push
         run: |
