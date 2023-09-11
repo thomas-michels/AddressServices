@@ -47,3 +47,4 @@ jobs:
       - name: Push
         run: |
           docker push $DOCKER_USERNAME/$CONTAINER_NAME:latest
+ 
