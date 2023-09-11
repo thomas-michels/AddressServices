@@ -31,12 +31,10 @@ jobs:
           pytest
 
       - name: Login to DockerHub
-        run: |
-          echo "${{ vars.DOCKER_USERNAME }}"
-        # uses: docker/login-action@v2
-        # with:
-        #   username: ${{ DOCKER_USERNAME }}
-        #   password: ${{ DOCKER_TOKEN }}
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ vars.DOCKER_TOKEN }}
 
       - name: Build, tag
         env:
