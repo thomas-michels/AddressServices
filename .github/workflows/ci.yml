@@ -10,10 +10,10 @@ permissions:
   contents: read
 
 env:
-  CONTAINER_NAME: ${{ secrets.MY_CONTAINER_NAME }}
+  CONTAINER_NAME: ${{ .env.MY_CONTAINER_NAME }}
   IMAGE_TAG: ${{ github.sha }}
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  DOCKER_USERNAME: ${{ .env.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ .env.DOCKER_PASSWORD }}
 
 jobs:
   build:
