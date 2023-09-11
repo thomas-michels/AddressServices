@@ -35,6 +35,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         run: |
+          echo "teste"
           echo $DOCKER_TOKEN
           #  | docker login -u $DOCKER_USERNAME --password-stdin
 
