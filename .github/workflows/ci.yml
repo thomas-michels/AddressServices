@@ -10,10 +10,10 @@ permissions:
   contents: read
 
 env:
-  CONTAINER_NAME: ${{ .env.MY_CONTAINER_NAME }}
+  CONTAINER_NAME: ${{ secrets.MY_CONTAINER_NAME }}
   IMAGE_TAG: ${{ github.sha }}
-  DOCKER_USERNAME: ${{ .env.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ .env.DOCKER_PASSWORD }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   build:
@@ -35,6 +35,10 @@ jobs:
       - name: Test with pytest
         run: |
           pytest
+
+      - name: Display Environment Variables
+        run: |
+          echo "CONTAINER_NAME: $CONTAINER_NAME"
 
       - name: Login to DockerHub
         run: |
