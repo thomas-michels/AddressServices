@@ -36,8 +36,7 @@ jobs:
           DOCKER_TOKEN: ${{ env.DOCKER_TOKEN }}
         run: |
           echo "teste"
-          echo $DOCKER_TOKEN
-          #  | docker login -u $DOCKER_USERNAME --password-stdin
+          echo $DOCKER_TOKEN | docker login -u $DOCKER_USERNAME --password-stdin
 
       - name: Build, tag
         env:
