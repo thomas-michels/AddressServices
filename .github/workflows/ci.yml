@@ -44,7 +44,7 @@ jobs:
           CONTAINER_NAME: ${{ env.MY_CONTAINER_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t $CONTAINER_NAME:$IMAGE_TAG .
+          docker build -t address-services:$IMAGE_TAG .
 
       - name: Push
         run: |
