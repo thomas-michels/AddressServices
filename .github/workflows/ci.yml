@@ -40,7 +40,7 @@ jobs:
 
       - name: Build, tag
         env:
-          CONTAINER_NAME: ${{ MY_CONTAINER_NAME }}
+          CONTAINER_NAME: ${{ vars.MY_CONTAINER_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $CONTAINER_NAME:$IMAGE_TAG .
