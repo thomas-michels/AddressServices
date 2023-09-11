@@ -32,15 +32,15 @@ jobs:
 
       - name: Login to DockerHub
         env:
-          DOCKER_USERNAME: ${{ env.DOCKER_USERNAME }}
-          DOCKER_TOKEN: ${{ env.DOCKER_TOKEN }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         run: |
           echo "teste"
           docker login -u $DOCKER_USERNAME -p $DOCKER_TOKEN
 
       - name: Build, tag
         env:
-          CONTAINER_NAME: ${{ env.MY_CONTAINER_NAME }}
+          CONTAINER_NAME: ${{ secrets.MY_CONTAINER_NAME }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t $CONTAINER_NAME:$IMAGE_TAG .
