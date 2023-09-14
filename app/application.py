@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from app.core.db import lifespan
 from starlette.middleware.cors import CORSMiddleware
-from app.api.routes import address_router
+from app.api.routes import address_router, neighborhood_router
 
 
 def create_app() -> FastAPI:
@@ -19,5 +19,6 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(address_router)
+    app.include_router(neighborhood_router)
 
     return app

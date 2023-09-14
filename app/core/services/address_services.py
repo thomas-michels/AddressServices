@@ -4,7 +4,7 @@ from app.core.db.repositories import (
     StreetRepository,
     AddressRepository,
 )
-from app.core.entities import Address, PlainAddress, Street
+from app.core.entities import Address, PlainAddress, Street, Neighborhood
 
 
 class AddressServices:
@@ -23,11 +23,14 @@ class AddressServices:
             name=address.neighborhood
         )
         if not neighborhood:
+            neighbor = Neighborhood(name=address.neighborhood)
             neighborhood = await self.__neighborhood_repository.insert(
-                name=address.neighborhood
+                neighborhood=neighbor
             )
 
-        street = await self.__street_repository.select_by_zip_code(zip_code=address.zip_code)
+        street = await self.__street_repository.select_by_zip_code(
+            zip_code=address.zip_code
+        )
         if not street:
             street = await self.__street_repository.select_by_name(name=address.street)
 
