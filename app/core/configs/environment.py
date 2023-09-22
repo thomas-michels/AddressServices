@@ -25,11 +25,6 @@ class Environment(BaseSettings):
     DATABASE_MIN_CONNECTIONS: int = 1
     DATABASE_MAX_CONNECTIONS: int = 1
 
-    # REDIS
-    REDIS_HOST: str = "localhost"
-    REDIS_PORT: str = "6379"
-    TIMED_CACHE: int = 30
-
     class Config:
         """Load config file"""
 
